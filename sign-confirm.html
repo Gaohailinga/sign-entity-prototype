@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>签署协议</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  /* ===== 顶部 ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+  .header .welcome { font-weight: 500; }
+  .header .manager { color: #666; }
+  .header .manager strong { color: #333; font-weight: 500; }
+
+  /* ===== 步骤条 ===== */
+  .steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 8px;
+    padding: 32px 20px;
+    margin-bottom: 20px;
+  }
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+  }
+  .step .dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid #c0c4cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #999;
+  }
+  .step.active { color: #409eff; font-weight: 500; }
+  .step.active .dot {
+    border-color: #409eff;
+    background: #409eff;
+    color: #fff;
+  }
+  .step.done { color: #409eff; }
+  .step.done .dot {
+    border-color: #409eff;
+    background: #fff;
+    color: #409eff;
+  }
+  .step.done .dot::after {
+    content: "✓";
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .step-line {
+    width: 80px;
+    height: 1px;
+    background: #d9d9d9;
+    margin: 0 12px;
+  }
+
+  /* ===== 卡片 ===== */
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* ===== 协议分组 ===== */
+  .agreement-section { margin-bottom: 24px; }
+  .agreement-section:last-child { margin-bottom: 0; }
+  .group-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 3px solid #409eff;
+  }
+  .agreement-list {
+    padding-left: 13px;
+  }
+  .agreement-item {
+    font-size: 14px;
+    line-height: 2;
+    color: #555;
+  }
+  .agreement-item a {
+    color: #409eff;
+    text-decoration: none;
+    margin-left: 4px;
+  }
+  .agreement-item a:hover { text-decoration: underline; }
+  .status {
+    color: #999;
+    margin-left: 4px;
+  }
+
+  /* ===== 费率表 ===== */
+  .rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: center;
+  }
+  .rate-table th,
+  .rate-table td {
+    border: 1px solid #ebeef5;
+    padding: 12px 8px;
+  }
+  .rate-table th {
+    background: #fafafa;
+    color: #333;
+    font-weight: 600;
+  }
+  .rate-table td { color: #555; }
+  .rate-table .pay-type {
+    font-weight: 500;
+    color: #333;
+  }
+
+  /* ===== 底部按钮 ===== */
+  .action-bar {
+    text-align: center;
+    padding: 10px 0 30px;
+  }
+  .btn-primary {
+    display: inline-block;
+    min-width: 160px;
+    height: 42px;
+    line-height: 42px;
+    background: #409eff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: #66b1ff; }
+
+  @media (max-width: 768px) {
+    body { padding: 16px; }
+    .step-line { width: 30px; margin: 0 6px; }
+    .rate-table { font-size: 12px; }
+    .rate-table th,
+    .rate-table td { padding: 8px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- 顶部 -->
+  <div class="header">
+    <div class="welcome">欢迎加入天阙会生活！</div>
+    <div class="manager">您的合作经理：<strong>测试-BD1</strong></div>
+  </div>
+
+  <!-- 步骤条 -->
+  <div class="steps">
+    <div class="step done"><span class="dot"></span>注册账号</div>
+    <div class="step-line"></div>
+    <div class="step done"><span class="dot"></span>填写资料</div>
+    <div class="step-line"></div>
+    <div class="step done"><span class="dot"></span>信息审核</div>
+    <div class="step-line"></div>
+    <div class="step active"><span class="dot">4</span>签署协议</div>
+  </div>
+
+  <!-- 协议确认 -->
+  <div class="card">
+    <div class="card-title">签署协议——线上电子签约，完成后可下载电子协议，快速方便</div>
+
+    <div class="agreement-section">
+      <div class="group-title">1. 随行付支付有限公司</div>
+      <div class="agreement-list">
+        <div class="agreement-item">
+          • 外包服务协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
+        </div>
+        <div class="agreement-item">
+          • 补充协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="agreement-section">
+      <div class="group-title">2. 北京天阙科技有限公司</div>
+      <div class="agreement-list">
+        <div class="agreement-item">
+          • 合作服务协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
+        </div>
+        <div class="agreement-item">
+          • 补充协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 费率信息 -->
+  <div class="card">
+    <div class="card-title">请确认以下费率信息并完成签约</div>
+    <table class="rate-table">
+      <thead>
+        <tr>
+          <th>支付类型</th>
+          <th>费率模式</th>
+          <th>借记卡</th>
+          <th>借记卡封顶</th>
+          <th>贷记卡</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="pay-type">微信支付</td>
+          <td>扫码、公众号、小程序支付(线下)</td>
+          <td>0.23%</td>
+          <td>/</td>
+          <td>0.23%</td>
+        </tr>
+        <tr>
+          <td>公众号、小程序支付(线上)</td>
+          <td>0.65%</td>
+          <td>/</td>
+          <td>0.65%</td>
+        </tr>
+        <tr>
+          <td rowspan="2" class="pay-type">支付宝支付</td>
+          <td>扫码、服务窗（线下）支付</td>
+          <td>0.23%</td>
+          <td>/</td>
+          <td>0.23%</td>
+        </tr>
+        <tr>
+          <td>服务窗（线上）支付</td>
+          <td>0.65%</td>
+          <td>/</td>
+          <td>0.65%</td>
+        </tr>
+        <tr>
+          <td rowspan="2" class="pay-type">银联二维码</td>
+          <td>1000元以下(含)</td>
+          <td>0.23%</td>
+          <td>/</td>
+          <td>0.23%</td>
+        </tr>
+        <tr>
+          <td>1000元以上</td>
+          <td>0.23%</td>
+          <td>/</td>
+          <td>0.535%</td>
+        </tr>
+        <tr>
+          <td class="pay-type">刷卡</td>
+          <td>—</td>
+          <td>0.435%</td>
+          <td>18.75元/笔</td>
+          <td>0.535%</td>
+        </tr>
+        <tr>
+          <td class="pay-type">手机闪付</td>
+          <td>—</td>
+          <td>0.435%</td>
+          <td>/</td>
+          <td>0.535%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 底部按钮 -->
+  <div class="action-bar">
+    <button class="btn-primary" onclick="alert('进入电子签约流程')">立即签约</button>
+  </div>
+</div>
+</body>
+</html>
