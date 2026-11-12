@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>签约主体</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+  }
+  .phone {
+    width: 100%;
+    max-width: 500px;
+    min-height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* ===== 状态栏 ===== */
+  .status-bar {
+    background: #56917c;
+    color: #000;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .status-right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .battery {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 600;
+  }
+  .battery-icon {
+    width: 24px;
+    height: 12px;
+    border: 1.5px solid #000;
+    border-radius: 3px;
+    position: relative;
+    display: inline-block;
+  }
+  .battery-icon::before {
+    content: "";
+    position: absolute;
+    right: -4px;
+    top: 2.5px;
+    width: 2px;
+    height: 5px;
+    background: #000;
+    border-radius: 1px;
+  }
+  .battery-icon::after {
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    width: 85%;
+    background: #000;
+    border-radius: 1px;
+  }
+
+  /* ===== 导航栏 ===== */
+  .nav-bar {
+    background: #56917c;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+  .nav-back {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+  }
+  .nav-back svg { display: block; }
+  .nav-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .nav-done {
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+  }
+
+  /* ===== 主题色变量 ===== */
+  :root {
+    --primary: #3d8a6e;
+  }
+
+  /* ===== 提示卡片（样式对齐「展业范围含五省二市」参考页） ===== */
+  .tip-bar {
+    margin: 16px;
+    padding: 12px 14px;
+    background: #f6f6f6;
+    border-radius: 8px;
+  }
+  .tip-bar .tip-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666;
+  }
+  .tip-bar .tip-text .tip-label {
+    color: #333;
+    font-weight: 500;
+  }
+
+  /* ===== 列表 ===== */
+  .entity-list { margin-top: 4px; }
+  .entity-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 17px 16px;
+    cursor: pointer;
+    position: relative;
+  }
+  .entity-item::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: #eee;
+    transform: scaleY(0.5);
+  }
+  .entity-item:last-child::after { display: none; }
+  .entity-name {
+    font-size: 16px;
+    color: #333;
+    transition: color 0.15s;
+  }
+  .entity-item.selected .entity-name {
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .entity-check {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .entity-item.selected .entity-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+</head>
+<body>
+<div class="phone">
+  <!-- 状态栏 -->
+  <div class="status-bar">
+    <span>06:23</span>
+    <div class="status-right">
+      <!-- 信号 -->
+      <svg width="18" height="12" viewBox="0 0 18 12">
+        <rect x="0" y="7" width="3" height="5" rx="1" fill="#000"/>
+        <rect x="5" y="5" width="3" height="7" rx="1" fill="#000"/>
+        <rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="#000"/>
+        <rect x="15" y="0" width="3" height="12" rx="1" fill="#000"/>
+      </svg>
+      <!-- WiFi -->
+      <svg width="17" height="12" viewBox="0 0 17 12">
+        <path d="M8.5 9.5a2.2 2.2 0 0 1 2.2 2.2L8.5 12l-2.2-.3a2.2 2.2 0 0 1 2.2-2.2z" fill="#000"/>
+        <path d="M8.5 5.6c1.9 0 3.6.7 4.9 1.9l-1.5 1.5a4.9 4.9 0 0 0-6.8 0L3.6 7.5a7 7 0 0 1 4.9-1.9z" fill="#000"/>
+        <path d="M8.5 1.5c3 0 5.7 1.2 7.7 3.1l-1.5 1.5A8.9 8.9 0 0 0 8.5 3.6c-2.4 0-4.6.9-6.2 2.5L.8 4.6a10.9 10.9 0 0 1 7.7-3.1z" fill="#000"/>
+      </svg>
+      <span class="battery">91<span class="battery-icon"></span></span>
+    </div>
+  </div>
+
+  <!-- 导航栏 -->
+  <div class="nav-bar">
+    <div class="nav-back" onclick="history.back()">
+      <svg width="12" height="20" viewBox="0 0 12 20">
+        <path d="M10.5 1.5 2 10l8.5 8.5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="nav-title">签约主体</div>
+    <button class="nav-done">完成</button>
+  </div>
+
+  <!-- 签约主体列表 -->
+  <div class="entity-list" id="entityList">
+    <div class="entity-item selected" data-name="天阙">
+      <span class="entity-name">天阙</span>
+      <svg class="entity-check" viewBox="0 0 22 22" fill="none">
+        <path d="M3.5 11.5 9 17 18.5 5.5" stroke="#3d8a6e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="entity-item" data-name="随行付">
+      <span class="entity-name">随行付</span>
+      <svg class="entity-check" viewBox="0 0 22 22" fill="none">
+        <path d="M3.5 11.5 9 17 18.5 5.5" stroke="#3d8a6e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 提示卡片：在选择项枚举下面 -->
+  <div class="tip-bar" id="tipBar" style="display:none;">
+    <div class="tip-text" id="tipText"></div>
+  </div>
+</div>
+
+<script>
+  // 多选切换 + 联动提示
+  document.getElementById('entityList').addEventListener('click', function (e) {
+    var item = e.target.closest('.entity-item');
+    if (item) item.classList.toggle('selected');
+    updateTip();
+  });
+
+  // 完成：保存勾选结果并返回上一页（补充信息页回填）
+  document.querySelector('.nav-done').addEventListener('click', function () {
+    var picked = Array.prototype.map.call(
+      document.querySelectorAll('.entity-item.selected'),
+      function (el) { return el.dataset.name; }
+    );
+    try { localStorage.setItem('signEntities', JSON.stringify(picked)); } catch (e) {}
+    console.log('已选签约主体：', picked.join('、') || '（未选）');
+    if (document.referrer) history.back(); else location.href = 'supplement-info.html';
+  });
+
+  // 提示内容设置入口：setTip('提示文字') 即可显示提示条
+  function setTip(text, label) {
+    var bar = document.getElementById('tipBar');
+    if (!text) { bar.style.display = 'none'; return; }
+    document.getElementById('tipText').innerHTML =
+      '<span class="tip-label">' + (label || '提示：') + '</span>' + text;
+    bar.style.display = 'block';
+  }
+
+  // 按勾选组合联动提示
+  // 仅天阙：不展示提示；仅随行付：提醒需按机构情况勾选天阙；双选：展示四份协议说明
+  function updateTip() {
+    var hasTianque = document.querySelector('.entity-item[data-name="天阙"].selected') !== null;
+    var hasSuixingfu = document.querySelector('.entity-item[data-name="随行付"].selected') !== null;
+
+    if (hasTianque && hasSuixingfu) {
+      setTip('已同时选择天阙、随行付两个签约主体，签约时将同步签署天阙主体协议【合作服务协议、补充协议】及随行付主体协议【外包服务协议、补充协议】，共计四份协议。');
+    } else if (!hasTianque && hasSuixingfu) {
+      setTip('机构作业范围若含五省二市【黑龙江、吉林、辽宁、浙江、福建（厦门除外）】，需同步选择天阙主体进行签约。');
+    } else {
+      setTip('');
+    }
+  }
+
+  // 初始联动一次
+  updateTip();
+</script>
+</body>
+</html>
