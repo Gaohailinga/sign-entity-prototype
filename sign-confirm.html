@@ -99,33 +99,56 @@
   }
 
   /* ===== 协议分组 ===== */
-  .agreement-section { margin-bottom: 24px; }
+  .agreement-section {
+    border: 1px solid #ebeef5;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    background: #fafafa;
+  }
   .agreement-section:last-child { margin-bottom: 0; }
   .group-title {
     font-size: 15px;
     font-weight: 600;
-    color: #333;
+    color: #303133;
     margin-bottom: 12px;
-    padding-left: 10px;
-    border-left: 3px solid #409eff;
-  }
-  .agreement-list {
-    padding-left: 13px;
   }
   .agreement-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed #e4e7ed;
     font-size: 14px;
-    line-height: 2;
-    color: #555;
+    color: #606266;
+  }
+  .agreement-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .agreement-item:first-child { padding-top: 0; }
+  .agreement-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .agreement-name::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #c0c4cc;
   }
   .agreement-item a {
     color: #409eff;
     text-decoration: none;
-    margin-left: 4px;
+    font-size: 13px;
   }
   .agreement-item a:hover { text-decoration: underline; }
   .status {
-    color: #999;
-    margin-left: 4px;
+    color: #909399;
+    font-size: 13px;
+    margin-right: 12px;
   }
 
   /* ===== 费率表 ===== */
@@ -204,25 +227,37 @@
 
     <div class="agreement-section">
       <div class="group-title">1. 随行付支付有限公司</div>
-      <div class="agreement-list">
-        <div class="agreement-item">
-          • 外包服务协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
-        </div>
-        <div class="agreement-item">
-          • 补充协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
-        </div>
+      <div class="agreement-item">
+        <span class="agreement-name">外包服务协议</span>
+        <span>
+          <span class="status">未签署</span>
+          <a href="#" download>下载</a>
+        </span>
+      </div>
+      <div class="agreement-item">
+        <span class="agreement-name">补充协议</span>
+        <span>
+          <span class="status">未签署</span>
+          <a href="#" download>下载</a>
+        </span>
       </div>
     </div>
 
     <div class="agreement-section">
       <div class="group-title">2. 北京天阙科技有限公司</div>
-      <div class="agreement-list">
-        <div class="agreement-item">
-          • 合作服务协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
-        </div>
-        <div class="agreement-item">
-          • 补充协议，状态：<span class="status">未签署</span>，<a href="#" download>下载</a>
-        </div>
+      <div class="agreement-item">
+        <span class="agreement-name">合作服务协议</span>
+        <span>
+          <span class="status">未签署</span>
+          <a href="#" download>下载</a>
+        </span>
+      </div>
+      <div class="agreement-item">
+        <span class="agreement-name">补充协议</span>
+        <span>
+          <span class="status">未签署</span>
+          <a href="#" download>下载</a>
+        </span>
       </div>
     </div>
   </div>
