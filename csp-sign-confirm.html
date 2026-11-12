@@ -398,41 +398,12 @@
   </div>
 </div>
 
-<!-- 合作协议签署提醒弹窗 -->
-<div class="modal-overlay" id="signModal">
-  <div class="modal">
-    <div class="modal-header">合作协议签署提醒</div>
-    <div class="modal-body">
-      <p>尊敬的合作伙伴：</p>
-      <p>若您将在五省二市【黑龙江、吉林、辽宁、浙江、福建（厦门除外）地区】作业，为完善上述地区商户支付能力，明确双方权责、保障贵机构合法权益，您在与随行付支付有限公司签约的同时，需同步与北京天阙科技有限公司签署合作协议。</p>
-      <p>请点击确认前往签署。期待与您开展新的合作篇章，大展宏图，感谢您一直以来的理解与支持！</p>
-    </div>
-    <div class="modal-footer">
-      <button class="modal-btn cancel" id="cancelBtn">取消</button>
-      <button class="modal-btn confirm" id="confirmBtn">确认并前往签约</button>
-    </div>
-  </div>
-</div>
+
 
 <script>
-  var modal = document.getElementById('signModal');
-
   document.getElementById('signBtn').addEventListener('click', function () {
-    modal.classList.add('show');
-  });
-
-  document.getElementById('cancelBtn').addEventListener('click', function () {
-    modal.classList.remove('show');
-  });
-
-  document.getElementById('confirmBtn').addEventListener('click', function () {
     // 实际项目中替换为真实签约页面地址
     location.href = 'https://www.example.com/sign';
-  });
-
-  // 点击遮罩关闭
-  modal.addEventListener('click', function (e) {
-    if (e.target === modal) modal.classList.remove('show');
   });
 
   // 根据签约主体选择动态显示协议分组

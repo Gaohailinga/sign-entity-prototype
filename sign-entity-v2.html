@@ -186,6 +186,20 @@
     opacity: 1;
     transform: scale(1);
   }
+  .entity-item.disabled {
+    opacity: 0.55;
+  }
+  .entity-item.disabled .entity-name {
+    color: #999;
+  }
+  .entity-item.disabled .entity-checkbox {
+    background: #c0c4cc;
+    border-color: #c0c4cc;
+  }
+  .entity-item.disabled .entity-checkbox svg {
+    opacity: 1;
+    transform: scale(1);
+  }
 </style>
 </head>
 <body>
@@ -222,7 +236,7 @@
 
   <!-- 签约主体列表 -->
   <div class="entity-list" id="entityList">
-    <div class="entity-item selected" data-name="天阙">
+    <div class="entity-item selected disabled" data-name="天阙">
       <span class="entity-name">天阙</span>
       <div class="entity-checkbox">
         <svg viewBox="0 0 14 14" fill="none">
