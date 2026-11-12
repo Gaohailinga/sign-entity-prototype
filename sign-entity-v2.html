@@ -230,7 +230,7 @@
         </svg>
       </div>
     </div>
-    <div class="entity-item" data-name="随行付">
+    <div class="entity-item selected" data-name="随行付">
       <span class="entity-name">随行付</span>
       <div class="entity-checkbox">
         <svg viewBox="0 0 14 14" fill="none">
@@ -252,28 +252,20 @@
   var suixingfuItem = list.querySelector('.entity-item[data-name="随行付"]');
 
   // 方案二交互：
-  // - 选择天阙：不展示提示
-  // - 选择随行付：自动勾选天阙，并提示“随行付、天阙需同步进行签约”
-  // - 取消天阙：如果随行付已选，则同步取消随行付
+  // - 默认同时勾选天阙、随行付
+  // - 随行付可手动取消
+  // - 天阙不可取消
   list.addEventListener('click', function (e) {
     var item = e.target.closest('.entity-item');
     if (!item) return;
 
     var name = item.dataset.name;
-    var isSelected = item.classList.contains('selected');
 
     if (name === '随行付') {
-      if (!isSelected) {
-        // 勾选随行付 → 自动勾上天阙
-        item.classList.add('selected');
-        tianqueItem.classList.add('selected');
-      } else {
-        // 取消随行付 → 仅取消随行付
-        item.classList.remove('selected');
-      }
-    } else if (name === '天阙') {
-      // 天阙支持手动取消，不同步影响随行付
       item.classList.toggle('selected');
+    } else if (name === '天阙') {
+      // 天阙不可取消，点击无响应
+      return;
     }
 
     updateTip();

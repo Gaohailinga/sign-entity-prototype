@@ -283,10 +283,10 @@
     <div class="card-title">签署协议——线上电子签约，完成后可下载电子协议，快速方便</div>
 
     <div class="agreement-wrap">
-      <div class="agreement-section">
-        <div class="group-title">随行付支付有限公司</div>
+      <div class="agreement-section" id="tianqueGroup">
+        <div class="group-title">北京天阙科技有限公司</div>
         <div class="agreement-item">
-          <span class="agreement-name">外包服务协议</span>
+          <span class="agreement-name">合作服务协议</span>
           <span>
             <span class="status">未签署</span>
             <a href="#" download>下载</a>
@@ -301,10 +301,10 @@
         </div>
       </div>
 
-      <div class="agreement-section">
-        <div class="group-title">北京天阙科技有限公司</div>
+      <div class="agreement-section" id="suixingfuGroup">
+        <div class="group-title">随行付支付有限公司</div>
         <div class="agreement-item">
-          <span class="agreement-name">合作服务协议</span>
+          <span class="agreement-name">外包服务协议</span>
           <span>
             <span class="status">未签署</span>
             <a href="#" download>下载</a>
@@ -434,6 +434,19 @@
   modal.addEventListener('click', function (e) {
     if (e.target === modal) modal.classList.remove('show');
   });
+
+  // 根据签约主体选择动态显示协议分组
+  var picked = [];
+  try { picked = JSON.parse(localStorage.getItem('signEntities')) || []; } catch (e) {}
+  var tqGroup = document.getElementById('tianqueGroup');
+  var sxfGroup = document.getElementById('suixingfuGroup');
+  if (picked.length) {
+    tqGroup.style.display = picked.indexOf('天阙') > -1 ? '' : 'none';
+    sxfGroup.style.display = picked.indexOf('随行付') > -1 ? '' : 'none';
+    if (picked.length < 2) {
+      document.querySelector('.agreement-wrap').style.gridTemplateColumns = '1fr';
+    }
+  }
 </script>
 </body>
 </html>
