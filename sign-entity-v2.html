@@ -160,15 +160,29 @@
     color: var(--primary);
     font-weight: 500;
   }
-  .entity-check {
-    width: 22px;
-    height: 22px;
+  .entity-checkbox {
+    width: 20px;
+    height: 20px;
     flex-shrink: 0;
+    border: 1.5px solid #c0c4cc;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .entity-item.selected .entity-checkbox {
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+  .entity-checkbox svg {
+    width: 13px;
+    height: 13px;
     opacity: 0;
     transform: scale(0.6);
-    transition: opacity 0.15s, transform 0.15s;
+    transition: all 0.15s;
   }
-  .entity-item.selected .entity-check {
+  .entity-item.selected .entity-checkbox svg {
     opacity: 1;
     transform: scale(1);
   }
@@ -208,17 +222,21 @@
 
   <!-- 签约主体列表 -->
   <div class="entity-list" id="entityList">
-    <div class="entity-item" data-name="天阙">
+    <div class="entity-item selected" data-name="天阙">
       <span class="entity-name">天阙</span>
-      <svg class="entity-check" viewBox="0 0 22 22" fill="none">
-        <path d="M3.5 11.5 9 17 18.5 5.5" stroke="#3d8a6e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <div class="entity-checkbox">
+        <svg viewBox="0 0 14 14" fill="none">
+          <path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
     <div class="entity-item" data-name="随行付">
       <span class="entity-name">随行付</span>
-      <svg class="entity-check" viewBox="0 0 22 22" fill="none">
-        <path d="M3.5 11.5 9 17 18.5 5.5" stroke="#3d8a6e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <div class="entity-checkbox">
+        <svg viewBox="0 0 14 14" fill="none">
+          <path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -250,17 +268,12 @@
         item.classList.add('selected');
         tianqueItem.classList.add('selected');
       } else {
-        // 取消随行付 → 仅取消随行付，天阙保留用户选择
+        // 取消随行付 → 仅取消随行付
         item.classList.remove('selected');
       }
     } else if (name === '天阙') {
-      if (!isSelected) {
-        item.classList.add('selected');
-      } else {
-        // 取消天阙：若随行付已选，则随行付也取消
-        item.classList.remove('selected');
-        suixingfuItem.classList.remove('selected');
-      }
+      // 天阙支持手动取消，不同步影响随行付
+      item.classList.toggle('selected');
     }
 
     updateTip();
@@ -291,14 +304,8 @@
     var hasTianque = tianqueItem.classList.contains('selected');
     var hasSuixingfu = suixingfuItem.classList.contains('selected');
 
-    if (hasTianque && hasSuixingfu) {
-      setTip('随行付、天阙需同步进行签约。');
-    } else if (hasTianque && !hasSuixingfu) {
-      // 仅天阙：不展示提示
-      setTip('');
-    } else if (!hasTianque && hasSuixingfu) {
-      // 理论上不会走到：因为勾选随行付会自动勾上天阙
-      setTip('随行付、天阙需同步进行签约。');
+    if (hasSuixingfu) {
+      setTip('机构作业范围若含五省二市【黑龙江、吉林、辽宁、浙江、福建（厦门除外）】，需同步选择天阙主体进行签约。');
     } else {
       setTip('');
     }
