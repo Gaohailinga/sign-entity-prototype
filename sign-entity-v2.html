@@ -186,12 +186,6 @@
     opacity: 1;
     transform: scale(1);
   }
-  .entity-item.disabled {
-    opacity: 0.55;
-  }
-  .entity-item.disabled .entity-name {
-    color: #999;
-  }
   .entity-item.disabled .entity-checkbox {
     background: #c0c4cc;
     border-color: #c0c4cc;
@@ -266,8 +260,8 @@
   var suixingfuItem = list.querySelector('.entity-item[data-name="随行付"]');
 
   // 方案二交互：
-  // - 默认同时勾选天阙、随行付
-  // - 随行付可手动取消
+  // - 默认勾选天阙
+  // - 随行付可手动勾选/取消
   // - 天阙不可取消
   list.addEventListener('click', function (e) {
     var item = e.target.closest('.entity-item');
