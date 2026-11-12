@@ -299,16 +299,9 @@
     bar.style.display = 'block';
   }
 
-  // 按勾选组合联动提示
+  // 按勾选组合联动提示（当前无提示）
   function updateTip() {
-    var hasTianque = tianqueItem.classList.contains('selected');
-    var hasSuixingfu = suixingfuItem.classList.contains('selected');
-
-    if (hasSuixingfu) {
-      setTip('机构作业范围若含五省二市【黑龙江、吉林、辽宁、浙江、福建（厦门除外）】，需同步选择天阙主体进行签约。');
-    } else {
-      setTip('');
-    }
+    setTip('');
   }
 
   // 初始联动一次
