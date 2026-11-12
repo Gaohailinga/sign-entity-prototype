@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>协议预览设计稿</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+    padding: 40px 20px;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ===== 页面标题 ===== */
+  h1 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* ===== 主体分组（沿用现有卡片） ===== */
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .group-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #303133;
+    margin-bottom: 14px;
+  }
+
+  /* ===== 协议行：名称 + 状态 + 操作 ===== */
+  .agreement-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .agreement-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .agreement-row:first-child { padding-top: 0; }
+  .agreement-name { font-size: 14px; color: #333; }
+  .agreement-status { font-size: 13px; color: #909399; margin-right: 16px; }
+  .actions { display: flex; gap: 12px; }
+  .actions a {
+    font-size: 13px;
+    color: #409eff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .actions a:hover { text-decoration: underline; }
+
+  /* ===== 行内协议预览区（默认隐藏） ===== */
+  .preview-inline {
+    display: none;
+    margin-top: 10px;
+    padding: 14px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #606266;
+    border-left: 3px solid #409eff;
+  }
+  .preview-inline.show { display: block; }
+  .preview-inline .placeholder {
+    color: #999;
+    font-style: italic;
+  }
+
+  /* ===== 抽屉协议预览（右侧滑出） ===== */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    z-index: 1000;
+  }
+  .drawer-overlay.show { display: block; }
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 520px;
+    max-width: 90vw;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -4px 0 16px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+  }
+  .drawer-overlay.show .drawer { transform: translateX(0); }
+  .drawer-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid #ebeef5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .drawer-title { font-size: 16px; font-weight: 600; color: #303133; }
+  .drawer-close {
+    width: 28px; height: 28px;
+    border: none; background: transparent;
+    font-size: 20px; color: #909399;
+    cursor: pointer;
+  }
+  .drawer-body {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #606266;
+  }
+  .drawer-footer {
+    padding: 14px 24px;
+    border-top: 1px solid #ebeef5;
+    text-align: right;
+  }
+  .btn {
+    height: 36px; padding: 0 20px;
+    border-radius: 4px; font-size: 14px;
+    border: none; cursor: pointer;
+  }
+  .btn-primary { background: #1890ff; color: #fff; }
+
+  @media (max-width: 640px) {
+    .actions a { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>协议预览设计稿（两种形态）</h1>
+
+  <!-- 形态一：行内展开 -->
+  <div class="card">
+    <div class="group-title">形态一 · 行内展开预览</div>
+
+    <div class="agreement-row">
+      <span class="agreement-name">外包服务协议</span>
+      <div style="display:flex;align-items:center;">
+        <span class="agreement-status">未签署</span>
+        <div class="actions">
+          <a href="#" onclick="toggleInline('preview1', event)">预览</a>
+          <a href="#" download>下载</a>
+        </div>
+      </div>
+    </div>
+    <div class="preview-inline" id="preview1">
+      <p class="placeholder">【协议预览占位】此处接入真实协议内容，可由后端返回 HTML 片段或 PDF 预览地址。</p>
+    </div>
+
+    <div class="agreement-row">
+      <span class="agreement-name">补充协议</span>
+      <div style="display:flex;align-items:center;">
+        <span class="agreement-status">未签署</span>
+        <div class="actions">
+          <a href="#" onclick="toggleInline('preview2', event)">预览</a>
+          <a href="#" download>下载</a>
+        </div>
+      </div>
+    </div>
+    <div class="preview-inline" id="preview2">
+      <p class="placeholder">【协议预览占位】此处接入真实协议内容。</p>
+    </div>
+  </div>
+
+  <!-- 形态二：右侧抽屉 -->
+  <div class="card">
+    <div class="group-title">形态二 · 右侧抽屉预览</div>
+
+    <div class="agreement-row">
+      <span class="agreement-name">合作服务协议</span>
+      <div style="display:flex;align-items:center;">
+        <span class="agreement-status">未签署</span>
+        <div class="actions">
+          <a href="#" onclick="openDrawer('合作服务协议', event)">预览</a>
+          <a href="#" download>下载</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="agreement-row">
+      <span class="agreement-name">补充协议</span>
+      <div style="display:flex;align-items:center;">
+        <span class="agreement-status">未签署</span>
+        <div class="actions">
+          <a href="#" onclick="openDrawer('补充协议', event)">预览</a>
+          <a href="#" download>下载</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 抽屉 -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer(event)">
+  <div class="drawer" onclick="event.stopPropagation()">
+    <div class="drawer-header">
+      <div class="drawer-title" id="drawerTitle">协议预览</div>
+      <button class="drawer-close" onclick="closeDrawer()">×</button>
+    </div>
+    <div class="drawer-body">
+      <p class="placeholder">【协议预览占位】</p>
+      <p>第一条 合作内容</p>
+      <p>甲乙双方基于平等、自愿、诚实信用原则，就相关服务合作事宜达成如下协议……</p>
+      <p>（后续接入真实协议文本或 PDF 预览组件。）</p>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn btn-primary" onclick="closeDrawer()">我已阅读并同意</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleInline(id, e) {
+    e.preventDefault();
+    var el = document.getElementById(id);
+    el.classList.toggle('show');
+  }
+
+  function openDrawer(title, e) {
+    e.preventDefault();
+    document.getElementById('drawerTitle').textContent = title;
+    document.getElementById('drawerOverlay').classList.add('show');
+  }
+
+  function closeDrawer(e) {
+    if (e && e.target !== e.currentTarget) return;
+    document.getElementById('drawerOverlay').classList.remove('show');
+  }
+</script>
+</body>
+</html>
