@@ -143,6 +143,7 @@ CSP 机构入驻时，需要选择签约主体。当机构作业区域包含「�
 | 页面 | 链接 |
 |---|---|
 | 统一导航首页 | https://gaohailinga.github.io/sign-entity-prototype/ |
+| 掌中宝BD审核节点单独导航 | https://gaohailinga.github.io/sign-entity-prototype/index-bd-review.html |
 | 方案一：补充信息 | https://gaohailinga.github.io/sign-entity-prototype/supplement-info.html |
 | 方案一：签约主体 | https://gaohailinga.github.io/sign-entity-prototype/sign-entity.html |
 | 方案二：补充信息 | https://gaohailinga.github.io/sign-entity-prototype/supplement-info-v2.html |

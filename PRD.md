@@ -34,44 +34,59 @@ CSP 机构入驻平台时，需要根据机构作业区域选择签约主体。�
 
 ## 四、页面流程
 
-统一导航首页
+统一导航首页（index.html）
   方案一：联动提示
-    补充信息页（supplement-info.html）
-      点击「签约主体」→ 签约主体页（sign-entity.html）
-    签约主体页（sign-entity.html）
+    掌中宝BD审核节点补充信息页（supplement-info.html）
+      点击「签约主体」→ 掌中宝BD审核节点签约主体选择页（sign-entity.html）
+    掌中宝BD审核节点签约主体选择页（sign-entity.html）
       点击「完成」→ 返回补充信息页
     CSP 签署协议确认页（csp-sign-confirm.html）
       点击「立即签约」→ 弹出「合作协议签署提醒」弹窗
         取消 → 收起弹窗
         确认并前往签约 → 跳转真实签约页面
   方案二：自动同步勾选
-    补充信息页（supplement-info-v2.html）
-      点击「签约主体」→ 签约主体页（sign-entity-v2.html）
-    签约主体页（sign-entity-v2.html）
+    掌中宝BD审核节点补充信息页（supplement-info-v2.html）
+      点击「签约主体」→ 掌中宝BD审核节点签约主体选择页（sign-entity-v2.html）
+    掌中宝BD审核节点签约主体选择页（sign-entity-v2.html）
       点击「完成」→ 返回补充信息页
     CSP 签署协议确认页（csp-sign-confirm.html）
       点击「立即签约」→ 弹出「合作协议签署提醒」弹窗
+
+掌中宝BD审核节点单独导航首页（index-bd-review.html）
+  掌中宝BD审核节点补充信息页（supplement-info-v2.html）
+    点击「签约主体」→ 掌中宝BD审核节点签约主体选择页（sign-entity-v2.html）
+  掌中宝BD审核节点签约主体选择页（sign-entity-v2.html）
+    点击「完成」→ 返回补充信息页
+  CSP 签署协议确认页（csp-sign-confirm.html）
+    点击「立即签约」→ 弹出「合作协议签署提醒」弹窗
 
 ---
 
 ## 五、功能说明
 
-### 5.1 统一导航首页（index.html）
+### 5.1 统一导航首页（index.html / index-bd-review.html）
 
-**页面路径**：index.html
+**页面路径**：
+- 双方案对比导航：index.html
+- 掌中宝BD审核节点单独导航：index-bd-review.html
 
-**页面用途**：作为原型入口，左侧展示页面导航，右侧 iframe 加载对应原型页面，方便业务方在同一个页面中切换查看不同方案。
+**页面用途**：作为原型入口，左侧展示页面导航，右侧 iframe 加载对应原型页面。`index.html` 用于业务方对比查看方案一和方案二；`index-bd-review.html` 是面向掌中宝BD审核节点的单独导航入口，只展示最终采用的方案二流程，不出现「方案一 / 方案二」字样。
 
 **核心元素**：
 1. 左侧导航栏
-   - 方案一：联动提示
-     - 补充信息页
-     - 签约主体页
-     - CSP 签署协议确认页
-   - 方案二：自动同步勾选
-     - 补充信息页
-     - 签约主体页
-     - CSP 签署协议确认页
+   - `index.html` 按方案分组：
+     - 方案一：联动提示
+       - 掌中宝BD审核节点补充信息页
+       - 掌中宝BD审核节点签约主体选择页
+       - CSP 签署协议确认页
+     - 方案二：自动同步勾选
+       - 掌中宝BD审核节点补充信息页
+       - 掌中宝BD审核节点签约主体选择页
+       - CSP 签署协议确认页
+   - `index-bd-review.html` 不再区分方案，直接平铺：
+     - 掌中宝BD审核节点补充信息页（supplement-info-v2.html）
+     - 掌中宝BD审核节点签约主体选择页（sign-entity-v2.html）
+     - CSP 签署协议确认页（csp-sign-confirm.html）
    - 点击导航项，右侧 iframe 切换加载对应页面。
    - 当前选中项高亮显示。
 2. 顶部标题栏
@@ -79,9 +94,11 @@ CSP 机构入驻平台时，需要根据机构作业区域选择签约主体。�
    - 右侧「新窗口打开」链接，点击后在新标签页单独打开当前原型页面。
 
 **研发改动点**：
-- 新增统一导航首页。
+- 新增统一导航首页 index.html。
+- 新增掌中宝BD审核节点单独导航首页 index-bd-review.html，默认加载 supplement-info-v2.html。
 - 使用 iframe 加载各原型页面，需处理同域 localStorage 共享。
 - 导航点击事件更新 iframe src、顶部标题和「新窗口打开」链接。
+- 导航项名称与掌中宝BD审核节点业务术语保持一致。
 
 ---
 
