@@ -189,6 +189,67 @@
   }
   .btn-primary:hover { background: #66b1ff; }
 
+  /* ===== 弹窗 ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    width: 100%;
+    max-width: 520px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+  .modal-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid #ebeef5;
+    font-size: 16px;
+    font-weight: 600;
+    color: #303133;
+  }
+  .modal-body {
+    padding: 22px 24px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #606266;
+  }
+  .modal-body p { margin-bottom: 14px; }
+  .modal-body p:last-child { margin-bottom: 0; }
+  .modal-footer {
+    padding: 14px 24px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+  .modal-btn {
+    height: 36px;
+    padding: 0 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .modal-btn.cancel {
+    background: #fff;
+    border-color: #d9d9d9;
+    color: #606266;
+  }
+  .modal-btn.cancel:hover { border-color: #409eff; color: #409eff; }
+  .modal-btn.confirm {
+    background: #1890ff;
+    color: #fff;
+  }
+  .modal-btn.confirm:hover { background: #40a9ff; }
+
   @media (max-width: 768px) {
     body { padding: 16px; }
     .step-line { width: 30px; margin: 0 6px; }
@@ -333,8 +394,46 @@
 
   <!-- 底部按钮 -->
   <div class="action-bar">
-    <button class="btn-primary" onclick="alert('进入电子签约流程')">立即签约</button>
+    <button class="btn-primary" id="signBtn">立即签约</button>
   </div>
 </div>
+
+<!-- 合作协议签署提醒弹窗 -->
+<div class="modal-overlay" id="signModal">
+  <div class="modal">
+    <div class="modal-header">合作协议签署提醒</div>
+    <div class="modal-body">
+      <p>尊敬的合作伙伴：</p>
+      <p>若您将在五省二市【黑龙江、吉林、辽宁、浙江、福建（厦门除外）地区】作业，为完善上述地区商户支付能力，明确双方权责、保障贵机构合法权益，您在与随行付支付有限公司签约的同时，需同步与北京天阙科技有限公司签署合作协议。</p>
+      <p>请点击确认前往签署。期待与您开展新的合作篇章，大展宏图，感谢您一直以来的理解与支持！</p>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-btn cancel" id="cancelBtn">取消</button>
+      <button class="modal-btn confirm" id="confirmBtn">确认并前往签约</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var modal = document.getElementById('signModal');
+
+  document.getElementById('signBtn').addEventListener('click', function () {
+    modal.classList.add('show');
+  });
+
+  document.getElementById('cancelBtn').addEventListener('click', function () {
+    modal.classList.remove('show');
+  });
+
+  document.getElementById('confirmBtn').addEventListener('click', function () {
+    // 实际项目中替换为真实签约页面地址
+    location.href = 'https://www.example.com/sign';
+  });
+
+  // 点击遮罩关闭
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) modal.classList.remove('show');
+  });
+</script>
 </body>
 </html>
