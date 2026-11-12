@@ -98,28 +98,32 @@
     margin-bottom: 20px;
   }
 
-  /* ===== 协议分组 ===== */
+  /* ===== 协议分组（紧凑双列） ===== */
+  .agreement-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
   .agreement-section {
     border: 1px solid #ebeef5;
-    border-radius: 8px;
-    padding: 18px 20px;
-    margin-bottom: 16px;
-    background: #fafafa;
+    border-radius: 6px;
+    padding: 12px 14px;
+    background: #fff;
+    margin-bottom: 0;
   }
-  .agreement-section:last-child { margin-bottom: 0; }
   .group-title {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: #303133;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .agreement-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px dashed #e4e7ed;
-    font-size: 14px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
     color: #606266;
   }
   .agreement-item:last-child {
@@ -127,28 +131,20 @@
     padding-bottom: 0;
   }
   .agreement-item:first-child { padding-top: 0; }
-  .agreement-name {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .agreement-name::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #c0c4cc;
-  }
+  .agreement-name { color: #333; }
   .agreement-item a {
     color: #409eff;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
   }
   .agreement-item a:hover { text-decoration: underline; }
   .status {
     color: #909399;
-    font-size: 13px;
-    margin-right: 12px;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  @media (max-width: 640px) {
+    .agreement-wrap { grid-template-columns: 1fr; }
   }
 
   /* ===== 费率表 ===== */
@@ -225,39 +221,41 @@
   <div class="card">
     <div class="card-title">签署协议——线上电子签约，完成后可下载电子协议，快速方便</div>
 
-    <div class="agreement-section">
-      <div class="group-title">1. 随行付支付有限公司</div>
-      <div class="agreement-item">
-        <span class="agreement-name">外包服务协议</span>
-        <span>
-          <span class="status">未签署</span>
-          <a href="#" download>下载</a>
-        </span>
+    <div class="agreement-wrap">
+      <div class="agreement-section">
+        <div class="group-title">随行付支付有限公司</div>
+        <div class="agreement-item">
+          <span class="agreement-name">外包服务协议</span>
+          <span>
+            <span class="status">未签署</span>
+            <a href="#" download>下载</a>
+          </span>
+        </div>
+        <div class="agreement-item">
+          <span class="agreement-name">补充协议</span>
+          <span>
+            <span class="status">未签署</span>
+            <a href="#" download>下载</a>
+          </span>
+        </div>
       </div>
-      <div class="agreement-item">
-        <span class="agreement-name">补充协议</span>
-        <span>
-          <span class="status">未签署</span>
-          <a href="#" download>下载</a>
-        </span>
-      </div>
-    </div>
 
-    <div class="agreement-section">
-      <div class="group-title">2. 北京天阙科技有限公司</div>
-      <div class="agreement-item">
-        <span class="agreement-name">合作服务协议</span>
-        <span>
-          <span class="status">未签署</span>
-          <a href="#" download>下载</a>
-        </span>
-      </div>
-      <div class="agreement-item">
-        <span class="agreement-name">补充协议</span>
-        <span>
-          <span class="status">未签署</span>
-          <a href="#" download>下载</a>
-        </span>
+      <div class="agreement-section">
+        <div class="group-title">北京天阙科技有限公司</div>
+        <div class="agreement-item">
+          <span class="agreement-name">合作服务协议</span>
+          <span>
+            <span class="status">未签署</span>
+            <a href="#" download>下载</a>
+          </span>
+        </div>
+        <div class="agreement-item">
+          <span class="agreement-name">补充协议</span>
+          <span>
+            <span class="status">未签署</span>
+            <a href="#" download>下载</a>
+          </span>
+        </div>
       </div>
     </div>
   </div>
