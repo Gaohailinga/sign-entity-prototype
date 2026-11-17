@@ -37,7 +37,7 @@
   .fee-title { font-size: 16px; font-weight: 600; color: #303133; text-align: left; margin-bottom: 16px; }
   .fee-groups { display: flex; flex-direction: column; gap: 12px; }
   .fee-group { border: 1px solid #e4e7ed; border-radius: 3px; overflow: hidden; background: #fff; }
-  .fee-group-header { width: 100%; height: 44px; padding: 0 20px; border: 0; background: #fafafa; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 14px; font-weight: 500; color: #303133; text-align: left; }
+  .fee-group-header { width: 100%; height: 44px; padding: 0 20px; border: 0; background: #fafafa; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 500; color: #303133; text-align: left; }
   .fee-group-header:hover { background: #f5f7fa; }
   .fee-group-header[aria-expanded="true"] { border-bottom: 1px solid #e4e7ed; }
   .fee-group-content { padding: 26px; overflow-x: auto; }
@@ -48,22 +48,8 @@
   .rate-table { width: 100%; min-width: 600px; border-collapse: collapse; table-layout: fixed; font-size: 14px; }
   .rate-table th, .rate-table td { border: 1px solid #e5e7eb; padding: 13px 18px; height: 52px; vertical-align: middle; }
   .rate-table th { background: #fafafa; color: #303133; font-weight: 600; text-align: center; }
-  .rate-table td { color: #606266; text-align: left; }
-  .pay-method { display: flex; align-items: center; gap: 12px; color: #303133; }
-  .pay-icon { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 600; flex: none; }
-  .pay-icon.wechat { background: #09bb07; }
-  .pay-icon.alipay { background: #1677ff; }
-  .pay-icon.unionpay { background: linear-gradient(135deg, #d93025 0 33%, #164a8b 33% 66%, #087b5d 66%); }
-  .pay-icon.douyin { background: #171823; }
-  .pay-icon.bestpay { background: #e95b68; }
-  .pay-icon.baitiao { background: #e1251b; border-radius: 6px; }
-  .pay-icon.order { background: #ffbd87; }
-  .pay-icon.card { background: #4d7cfe; }
-  .pay-icon.marketing { background: #7a5af8; }
-  .pay-icon.foreign { background: #1a1f71; }
-  .industry-group { margin-bottom: 22px; }
-  .industry-group:last-child { margin-bottom: 0; }
-  .industry-title { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 10px; }
+  .rate-table td { color: #606266; text-align: left; font-variant-numeric: tabular-nums; }
+  .product-name { color: #303133; overflow-wrap: anywhere; }
   .action-bar { text-align: center; padding: 10px 0 30px; }
   .btn-primary { display: inline-block; min-width: 160px; height: 42px; line-height: 42px; background: #409eff; color: #fff; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; }
   .btn-primary:hover { background: #66b1ff; }
@@ -110,129 +96,147 @@
   </div>
   <div class="card">
     <div class="fee-title">费率信息</div>
-    <div class="fee-groups">
-      <section class="fee-group">
-        <button type="button" class="fee-group-header collapsible" data-target="scanRates" aria-expanded="true" aria-controls="scanRates">扫码收款签约费率<span class="toggle-control"><span class="toggle-text">收起</span><span class="chevron"></span></span></button>
-        <div class="fee-group-content" id="scanRates">
-          <table class="rate-table">
-            <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
-            <thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead>
-            <tbody>
-              <tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.23</td><td>0.23</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.23</td><td>0.23</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon unionpay">银</span>银联单笔≤1000元</div></td><td>0.23</td><td>0.23</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon unionpay">银</span>银联单笔&gt;1000元</div></td><td>0.23</td><td>0.54</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.23</td><td>0.23</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon bestpay">翼</span>翼支付</div></td><td>0.23</td><td>0.23</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon baitiao">白</span>京东白条分期</div></td><td>0.54</td><td></td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon order">订</span>订单支付</div></td><td>0.10</td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="fee-group">
-        <button type="button" class="fee-group-header collapsible" data-target="bankCardRates" aria-expanded="false" aria-controls="bankCardRates">银行卡收款签约费率<span class="toggle-control"><span class="toggle-text">展示</span><span class="chevron"></span></span></button>
-        <div class="fee-group-content" id="bankCardRates" hidden>
-          <table class="rate-table">
-            <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
-            <thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead>
-            <tbody>
-              <tr><td><div class="pay-method"><span class="pay-icon card">卡</span>刷卡</div></td><td>0.435</td><td>0.535</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon card">闪</span>手机闪付</div></td><td>0.435</td><td>0.535</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="fee-group">
-        <button type="button" class="fee-group-header collapsible" data-target="onlineRates" aria-expanded="false" aria-controls="onlineRates">线上场景收款签约费率<span class="toggle-control"><span class="toggle-text">展示</span><span class="chevron"></span></span></button>
-        <div class="fee-group-content" id="onlineRates" hidden>
-          <table class="rate-table">
-            <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
-            <thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead>
-            <tbody>
-              <tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信公众号、小程序支付</div></td><td>0.65</td><td>0.65</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝服务窗支付</div></td><td>0.65</td><td>0.65</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="fee-group">
-        <button type="button" class="fee-group-header collapsible" data-target="smartMarketingRates" aria-expanded="false" aria-controls="smartMarketingRates">智慧营销收款签约费率<span class="toggle-control"><span class="toggle-text">展示</span><span class="chevron"></span></span></button>
-        <div class="fee-group-content" id="smartMarketingRates" hidden>
-          <table class="rate-table">
-            <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
-            <thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead>
-            <tbody>
-              <tr><td><div class="pay-method"><span class="pay-icon marketing">微</span>微信</div></td><td>0.23</td><td>0.23</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon marketing">支</span>支付宝</div></td><td>0.23</td><td>0.23</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon marketing">抖</span>抖音</div></td><td>0.23</td><td>0.23</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="fee-group">
-        <button type="button" class="fee-group-header collapsible" data-target="specialRates" aria-expanded="false" aria-controls="specialRates">特殊行业签约费率<span class="toggle-control"><span class="toggle-text">展示</span><span class="chevron"></span></span></button>
-        <div class="fee-group-content" id="specialRates" hidden>
-          <div class="industry-group">
-            <div class="industry-title">非盈利</div>
-            <table class="rate-table"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead><tbody><tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.00</td><td>0.00</td></tr><tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.00</td><td>0.00</td></tr><tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.00</td><td>0.00</td></tr></tbody></table>
-          </div>
-          <div class="industry-group">
-            <div class="industry-title">保险类</div>
-            <table class="rate-table"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead><tbody><tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.38</td><td>0.38</td></tr><tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.38</td><td>0.38</td></tr><tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.38</td><td>0.38</td></tr></tbody></table>
-          </div>
-          <div class="industry-group">
-            <div class="industry-title">缴费类</div>
-            <table class="rate-table"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead><tbody><tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.10</td><td>0.10</td></tr><tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.10</td><td>0.10</td></tr><tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.38</td><td>0.38</td></tr></tbody></table>
-          </div>
-          <div class="industry-group">
-            <div class="industry-title">私立院校</div>
-            <table class="rate-table"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead><tbody><tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.30</td><td>0.30</td></tr><tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.30</td><td>0.30</td></tr><tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.38</td><td>0.38</td></tr></tbody></table>
-          </div>
-          <div class="industry-group">
-            <div class="industry-title">线上类</div>
-            <table class="rate-table"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead><tbody><tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.30</td><td>0.30</td></tr><tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.30</td><td>0.30</td></tr><tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.38</td><td>0.38</td></tr></tbody></table>
-          </div>
-          <div class="industry-group">
-            <div class="industry-title">行业类1</div>
-            <table class="rate-table"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup><thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead><tbody><tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.30</td><td>0.30</td></tr><tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.30</td><td>0.30</td></tr><tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.30</td><td>0.30</td></tr></tbody></table>
-          </div>
-        </div>
-      </section>
-      <section class="fee-group">
-        <button type="button" class="fee-group-header collapsible" data-target="campaignRates" aria-expanded="false" aria-controls="campaignRates">营销活动签约费率<span class="toggle-control"><span class="toggle-text">展示</span><span class="chevron"></span></span></button>
-        <div class="fee-group-content" id="campaignRates" hidden>
-          <table class="rate-table">
-            <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
-            <thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead>
-            <tbody>
-              <tr><td><div class="pay-method"><span class="pay-icon wechat">微</span>微信</div></td><td>0.38</td><td>0.38</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon alipay">支</span>支付宝</div></td><td>0.38</td><td>0.38</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon douyin">抖</span>抖音</div></td><td>0.38</td><td>0.38</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <section class="fee-group">
-        <button type="button" class="fee-group-header collapsible" data-target="foreignRates" aria-expanded="false" aria-controls="foreignRates">外卡收款签约费率<span class="toggle-control"><span class="toggle-text">展示</span><span class="chevron"></span></span></button>
-        <div class="fee-group-content" id="foreignRates" hidden>
-          <table class="rate-table">
-            <colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
-            <thead><tr><th rowspan="2">支付方式</th><th colspan="2">签约成本</th></tr><tr><th>借记卡费率(%)</th><th>贷记卡费率(%)</th></tr></thead>
-            <tbody>
-              <tr><td><div class="pay-method"><span class="pay-icon foreign">V</span>Visa</div></td><td>2.50</td><td>2.50</td></tr>
-              <tr><td><div class="pay-method"><span class="pay-icon foreign">M</span>Mastercard</div></td><td>2.50</td><td>2.50</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+    <div class="fee-groups" id="feeGroups"></div>
   </div>
   <div class="action-bar">
     <button class="btn-primary" id="signBtn">立即签约</button>
   </div>
 </div>
 <script>
+  var cardCostColumns = ['借记卡费率（%）', '贷记卡费率（%）'];
+  var cardCapCostColumns = ['借记卡费率（%）', '贷记卡费率（%）', '借记卡封顶（元）'];
+  var valueAddedCostColumns = ['费率（%）', '保底服务费（元）', '封顶服务费（元）'];
+  var feeGroupData = [
+    {
+      id: 'scanRates', title: '扫码收款签约费率', columns: cardCostColumns,
+      rows: [
+        ['微信', '0.23', '0.23'],
+        ['支付宝', '0.23', '0.23'],
+        ['银联单笔≤1000元', '0.23', '0.23'],
+        ['银联单笔>1000元', '0.23', '0.54'],
+        ['抖音', '0.23', '0.23'],
+        ['翼支付', '0.23', '0.23'],
+        ['京东白条分期', '0.54', '--'],
+        ['订单支付', '0.10', '--']
+      ]
+    },
+    {
+      id: 'bankCardRates', title: '银行卡收款签约费率', columns: cardCapCostColumns,
+      rows: [
+        ['银联卡', '0.30', '0.30', '18.00'],
+        ['手机闪付', '0.52', '0.52', '--']
+      ]
+    },
+    {
+      id: 'onlineRates', title: '线上场景收款签约费率', columns: cardCostColumns,
+      rows: [
+        ['微信', '0.68', '0.68'],
+        ['支付宝', '0.68', '0.68'],
+        ['银联单笔≤1000元', '0.68', '0.68'],
+        ['银联单笔>1000元', '0.68', '0.68']
+      ]
+    },
+    {
+      id: 'smartMarketingRates', title: '智慧营销收款签约费率', columns: cardCostColumns,
+      rows: [
+        ['微信（智慧营销）', '0.21', '0.21'],
+        ['支付宝（智慧营销）', '0.21', '0.21']
+      ]
+    },
+    {
+      id: 'specialRates', title: '特殊行业签约费率', columns: cardCostColumns,
+      rows: [
+        ['微信贷记卡-行业类10', '--', '0.23'],
+        ['微信（保险类）', '0.80', '0.90'],
+        ['微信（缴费类）', '0.10', '0.10'],
+        ['微信（私立院校）', '0.60', '0.60'],
+        ['微信（非盈利）', '0.13', '0.11'],
+        ['支付宝（非盈利）', '0.15', '0.11']
+      ]
+    },
+    {
+      id: 'campaignRates', title: '营销活动签约费率', columns: cardCostColumns,
+      rows: [
+        ['教培机构', '0.38', '0.38'],
+        ['未来校园', '0.00', '0.00'],
+        ['高校食堂（学校主体）', '0.00', '0.00'],
+        ['高校食堂（非学校主体）', '0.20', '0.20'],
+        ['微信停车缴费', '0.38', '0.38'],
+        ['商业医疗活动', '0.39', '0.39'],
+        ['微信B2b', '0.25', '0.25'],
+        ['芝麻信用分', '0.11', '0.11'],
+        ['芝麻信用分活动', '0.11', '0.11']
+      ]
+    },
+    {
+      id: 'foreignRates', title: '外卡收款签约费率', columns: cardCapCostColumns,
+      rows: [
+        ['VISA-EDC', '3.00', '--', '--'],
+        ['VISA-DCC', '1.1555', '--', '--'],
+        ['万事达-EDC', '1.85', '--', '--'],
+        ['万事达-DCC', '1.00', '--', '--'],
+        ['运通AMEX-境内', '3.00', '3.1234', '18.75'],
+        ['运通AMEX-境外非酒店类', '1.85', '--', '--']
+      ]
+    },
+    {
+      id: 'foreignSpecialRates', title: '外卡特殊费率', columns: cardCostColumns,
+      rows: [
+        ['VISA-酒旅类-EDC', '3.5555', '--'],
+        ['VISA-酒旅类-DCC', '1.1555', '--'],
+        ['万事达-酒旅类-EDC', '6.00', '--'],
+        ['万事达-酒旅类-DCC', '1.00', '--'],
+        ['运通AMEX-境外酒店类', '5.00', '--']
+      ]
+    },
+    {
+      id: 'valueAddedRates', title: '增值产品签约费率', columns: valueAddedCostColumns,
+      rows: [
+        ['订单分账服务费', '0.10', '0.00', '99999.99'],
+        ['订单分账资金管理费', '0.10', '--', '--'],
+        ['余额分账服务费', '0.00', '0.00', '0.00'],
+        ['余额分账资金管理费', '0.00', '--', '--'],
+        ['提现-当日到账', '0.20', '0.00', '99999.00'],
+        ['提现-次日到账', '--', '--', '--'],
+        ['提现-历史余额提现', '--', '--', '--'],
+        ['定时到账', '0.0215', '0.00', '--']
+      ]
+    }
+  ];
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (char) {
+      return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char];
+    });
+  }
+  function renderFeeGroups() {
+    document.getElementById('feeGroups').innerHTML = feeGroupData.map(function (group, index) {
+      var expanded = index === 0;
+      var costWidth = 72 / group.columns.length;
+      var colgroup = '<col style="width:28%">' + group.columns.map(function () {
+        return '<col style="width:' + costWidth + '%">';
+      }).join('');
+      var subHeaders = group.columns.map(function (column) {
+        return '<th>' + escapeHtml(column) + '</th>';
+      }).join('');
+      var bodyRows = group.rows.map(function (row) {
+        return '<tr>' + row.map(function (cell, cellIndex) {
+          return '<td' + (cellIndex === 0 ? ' class="product-name"' : '') + '>' + escapeHtml(cell) + '</td>';
+        }).join('') + '</tr>';
+      }).join('');
+      return '<section class="fee-group">' +
+        '<button type="button" class="fee-group-header collapsible" data-target="' + group.id + '" aria-expanded="' + expanded + '" aria-controls="' + group.id + '">' +
+          escapeHtml(group.title) + '<span class="toggle-control"><span class="toggle-text">' + (expanded ? '收起' : '展示') + '</span><span class="chevron"></span></span>' +
+        '</button>' +
+        '<div class="fee-group-content" id="' + group.id + '"' + (expanded ? '' : ' hidden') + '>' +
+          '<table class="rate-table"><colgroup>' + colgroup + '</colgroup>' +
+            '<thead><tr><th rowspan="2">产品类型</th><th colspan="' + group.columns.length + '">签约成本</th></tr><tr>' + subHeaders + '</tr></thead>' +
+            '<tbody>' + bodyRows + '</tbody>' +
+          '</table>' +
+        '</div>' +
+      '</section>';
+    }).join('');
+  }
+  renderFeeGroups();
   document.getElementById('signBtn').addEventListener('click', function () {
     location.href = 'https://www.example.com/sign';
   });
