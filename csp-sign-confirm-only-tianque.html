@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>签署协议（仅天阙）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; min-height: 100vh; padding: 24px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 16px; color: #333; }
+  .header .welcome { font-weight: 500; }
+  .header .manager { color: #666; }
+  .header .manager strong { color: #333; font-weight: 500; }
+  .steps { display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px; padding: 32px 20px; margin-bottom: 20px; }
+  .step { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #666; }
+  .step .dot { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #c0c4cc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999; }
+  .step.active { color: #409eff; font-weight: 500; }
+  .step.active .dot { border-color: #409eff; background: #409eff; color: #fff; }
+  .step.done { color: #409eff; }
+  .step.done .dot { border-color: #409eff; background: #fff; color: #409eff; }
+  .step.done .dot::after { content: "✓"; font-size: 14px; font-weight: 700; }
+  .step-line { width: 80px; height: 1px; background: #d9d9d9; margin: 0 12px; }
+  .card { background: #fff; border-radius: 8px; padding: 28px; margin-bottom: 20px; }
+  .card-title { font-size: 16px; font-weight: 600; color: #333; text-align: center; margin-bottom: 20px; }
+  .agreement-wrap { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .agreement-section { border: 1px solid #ebeef5; border-radius: 6px; padding: 12px 14px; background: #fff; margin-bottom: 0; }
+  .group-title { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 8px; }
+  .agreement-item { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; color: #606266; }
+  .agreement-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .agreement-item:first-child { padding-top: 0; }
+  .agreement-name { color: #333; }
+  .agreement-item a { color: #409eff; text-decoration: none; font-size: 12px; }
+  .agreement-item a:hover { text-decoration: underline; }
+  .status { color: #909399; font-size: 12px; margin-right: 8px; }
+  @media (max-width: 640px) { .agreement-wrap { grid-template-columns: 1fr; } }
+  .rate-block { margin-bottom: 20px; border: 1px solid #ebeef5; border-radius: 6px; overflow: hidden; }
+  .rate-block-header { background: #f5f7fa; padding: 12px 16px; font-size: 15px; font-weight: 600; color: #303133; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .rate-block-header:hover { background: #ecf5ff; }
+  .rate-block-content { padding: 16px; }
+  .rate-sub-block { margin-bottom: 16px; border: 1px solid #e4e7ed; border-radius: 4px; overflow: hidden; }
+  .rate-sub-block:last-child { margin-bottom: 0; }
+  .rate-sub-header { background: #fafafa; padding: 10px 14px; font-size: 14px; font-weight: 500; color: #606266; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .rate-sub-header:hover { background: #f0f2f5; }
+  .rate-sub-content { padding: 12px; }
+  .toggle-icon { font-size: 18px; color: #909399; font-weight: normal; line-height: 1; }
+  .industry-group { margin-bottom: 16px; }
+  .industry-group:last-child { margin-bottom: 0; }
+  .industry-title { font-size: 13px; font-weight: 600; color: #409eff; margin-bottom: 8px; padding-left: 8px; border-left: 3px solid #409eff; }
+  .rate-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: center; }
+  .rate-table th, .rate-table td { border: 1px solid #ebeef5; padding: 12px 8px; }
+  .rate-table th { background: #fafafa; color: #333; font-weight: 600; }
+  .rate-table td { color: #555; }
+  .rate-table .pay-type { font-weight: 500; color: #333; }
+  .rate-table.simple th, .rate-table.simple td { padding: 10px 8px; font-size: 13px; }
+  .action-bar { text-align: center; padding: 10px 0 30px; }
+  .btn-primary { display: inline-block; min-width: 160px; height: 42px; line-height: 42px; background: #409eff; color: #fff; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; }
+  .btn-primary:hover { background: #66b1ff; }
+  @media (max-width: 768px) {
+    body { padding: 16px; }
+    .step-line { width: 30px; margin: 0 6px; }
+    .rate-table { font-size: 12px; }
+    .rate-table th, .rate-table td { padding: 8px 4px; }
+    .rate-block-header { font-size: 14px; padding: 10px 12px; }
+    .rate-sub-header { font-size: 13px; padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="welcome">欢迎加入天阙会生活！</div>
+    <div class="manager">您的合作经理：<strong>测试-BD1</strong></div>
+  </div>
+  <div class="steps">
+    <div class="step done"><span class="dot"></span>注册账号</div>
+    <div class="step-line"></div>
+    <div class="step done"><span class="dot"></span>填写资料</div>
+    <div class="step-line"></div>
+    <div class="step done"><span class="dot"></span>信息审核</div>
+    <div class="step-line"></div>
+    <div class="step active"><span class="dot">4</span>签署协议</div>
+  </div>
+  <div class="card">
+    <div class="card-title">签署协议——线上电子签约，完成后可下载电子协议，快速方便</div>
+    <div class="agreement-wrap">
+      <div class="agreement-section" id="tianqueGroup">
+        <div class="group-title">北京天阙科技有限公司</div>
+        <div class="agreement-item">
+          <span class="agreement-name">合作服务协议</span>
+          <span><span class="status">未签署</span><a href="#" download>下载</a></span>
+        </div>
+        <div class="agreement-item">
+          <span class="agreement-name">补充协议</span>
+          <span><span class="status">未签署</span><a href="#" download>下载</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">请确认以下费率信息并完成签约</div>
+    <div class="rate-block">
+      <div class="rate-block-header">标准费率</div>
+      <div class="rate-block-content">
+        <table class="rate-table">
+          <thead>
+            <tr><th>支付类型</th><th>费率模式</th><th>借记卡</th><th>借记卡封顶</th><th>贷记卡</th></tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="2" class="pay-type">微信支付</td><td>扫码、公众号、小程序支付(线下)</td><td>0.23%</td><td>/</td><td>0.23%</td></tr>
+            <tr><td>公众号、小程序支付(线上)</td><td>0.65%</td><td>/</td><td>0.65%</td></tr>
+            <tr><td rowspan="2" class="pay-type">支付宝支付</td><td>扫码、服务窗（线下）支付</td><td>0.23%</td><td>/</td><td>0.23%</td></tr>
+            <tr><td>服务窗（线上）支付</td><td>0.65%</td><td>/</td><td>0.65%</td></tr>
+            <tr><td rowspan="2" class="pay-type">银联二维码</td><td>1000元以下(含)</td><td>0.23%</td><td>/</td><td>0.23%</td></tr>
+            <tr><td>1000元以上</td><td>0.23%</td><td>/</td><td>0.535%</td></tr>
+            <tr><td class="pay-type">刷卡</td><td>—</td><td>0.435%</td><td>18.75元/笔</td><td>0.535%</td></tr>
+            <tr><td class="pay-type">手机闪付</td><td>—</td><td>0.435%</td><td>/</td><td>0.535%</td></tr>
+            <tr><td class="pay-type">抖音支付</td><td>—</td><td>0.23%</td><td>/</td><td>0.23%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rate-block">
+      <div class="rate-block-header collapsible" data-target="nonStandardRates">
+        非标费率（活动、特殊行业、D0结算等）
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="rate-block-content" id="nonStandardRates" style="display:none;">
+        <div class="rate-sub-block">
+          <div class="rate-sub-header collapsible" data-target="activityRates">
+            活动费率 <span class="toggle-icon">+</span>
+          </div>
+          <div class="rate-sub-content" id="activityRates" style="display:none;">
+            <table class="rate-table simple">
+              <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+              <tbody>
+                <tr><td class="pay-type">微信支付</td><td>0.38</td><td>0.38</td></tr>
+                <tr><td class="pay-type">支付宝支付</td><td>0.38</td><td>0.38</td></tr>
+                <tr><td class="pay-type">抖音支付</td><td>0.38</td><td>0.38</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rate-sub-block">
+          <div class="rate-sub-header collapsible" data-target="specialIndustryRates">
+            特殊行业费率 <span class="toggle-icon">+</span>
+          </div>
+          <div class="rate-sub-content" id="specialIndustryRates" style="display:none;">
+            <div class="industry-group">
+              <div class="industry-title">非盈利</div>
+              <table class="rate-table simple">
+                <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="pay-type">微信支付</td><td>0</td><td>0</td></tr>
+                  <tr><td class="pay-type">支付宝支付</td><td>0</td><td>0</td></tr>
+                  <tr><td class="pay-type">抖音支付</td><td>0</td><td>0</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="industry-group">
+              <div class="industry-title">保险类</div>
+              <table class="rate-table simple">
+                <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="pay-type">微信支付</td><td>0.38</td><td>0.38</td></tr>
+                  <tr><td class="pay-type">支付宝支付</td><td>0.38</td><td>0.38</td></tr>
+                  <tr><td class="pay-type">抖音支付</td><td>0.38</td><td>0.38</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="industry-group">
+              <div class="industry-title">缴费类</div>
+              <table class="rate-table simple">
+                <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="pay-type">微信支付</td><td>0.1</td><td>0.1</td></tr>
+                  <tr><td class="pay-type">支付宝支付</td><td>0.1</td><td>0.1</td></tr>
+                  <tr><td class="pay-type">抖音支付</td><td>0.38</td><td>0.38</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="industry-group">
+              <div class="industry-title">私立院校</div>
+              <table class="rate-table simple">
+                <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="pay-type">微信支付</td><td>0.3</td><td>0.3</td></tr>
+                  <tr><td class="pay-type">支付宝支付</td><td>0.3</td><td>0.3</td></tr>
+                  <tr><td class="pay-type">抖音支付</td><td>0.38</td><td>0.38</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="industry-group">
+              <div class="industry-title">线上类</div>
+              <table class="rate-table simple">
+                <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="pay-type">微信支付</td><td>0.3</td><td>0.3</td></tr>
+                  <tr><td class="pay-type">支付宝支付</td><td>0.3</td><td>0.3</td></tr>
+                  <tr><td class="pay-type">抖音支付</td><td>0.38</td><td>0.38</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="industry-group">
+              <div class="industry-title">行业类1</div>
+              <table class="rate-table simple">
+                <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="pay-type">微信支付</td><td>0.3</td><td>0.3</td></tr>
+                  <tr><td class="pay-type">支付宝支付</td><td>0.3</td><td>0.3</td></tr>
+                  <tr><td class="pay-type">抖音支付</td><td>0.3</td><td>0.3</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="rate-sub-block">
+          <div class="rate-sub-header collapsible" data-target="d0Rates">
+            D0结算 <span class="toggle-icon">+</span>
+          </div>
+          <div class="rate-sub-content" id="d0Rates" style="display:none;">
+            <table class="rate-table simple">
+              <thead><tr><th>结算方式</th><th>费率</th><th>保底值</th></tr></thead>
+              <tbody>
+                <tr><td class="pay-type">D0自动-定时到账</td><td>0.004</td><td>1元</td></tr>
+                <tr><td class="pay-type">D0提现-快速到账</td><td>0.004</td><td>/</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="rate-sub-block">
+          <div class="rate-sub-header collapsible" data-target="baitiaoRates">
+            白条分期 <span class="toggle-icon">+</span>
+          </div>
+          <div class="rate-sub-content" id="baitiaoRates" style="display:none;">
+            <table class="rate-table simple">
+              <thead><tr><th>支付类型</th><th>借记卡(%)</th><th>贷记卡(%)</th></tr></thead>
+              <tbody>
+                <tr><td class="pay-type">微信支付</td><td>0.38</td><td>0.38</td></tr>
+                <tr><td class="pay-type">支付宝支付</td><td>0.38</td><td>0.38</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="action-bar">
+    <button class="btn-primary" id="signBtn">立即签约</button>
+  </div>
+</div>
+<script>
+  document.getElementById('signBtn').addEventListener('click', function () {
+    location.href = 'https://www.example.com/sign';
+  });
+  document.querySelectorAll('.collapsible').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var target = document.getElementById(this.getAttribute('data-target'));
+      var icon = this.querySelector('.toggle-icon');
+      if (target.style.display === 'none') {
+        target.style.display = 'block';
+        icon.textContent = '−';
+      } else {
+        target.style.display = 'none';
+        icon.textContent = '+';
+      }
+    });
+  });
+
+</script>
+</body>
+</html>
