@@ -1,6 +1,6 @@
 # CSP 机构双主体签约流程 PRD（业务版）
 
-- 版本：v1.2
+- 版本：v1.3
 - 日期：2026-11-18
 - 适用对象：业务、运营、BD
 - 本地原型：`/Users/hailingdediannao/CodeBuddy/20261112063520/index-bd-review.html`
@@ -76,6 +76,15 @@ flowchart TD
 - 扫码收款签约费率为空时不展示，也不会自动展开其他分组。
 - 点击「立即签约」后直接跳转电子签约页面。
 
+### 3.4 费率信息变更签约确认页
+
+- 页面 UI 规范与 CSP 签署协议确认页保持一致。
+- 费率分组名称和顺序与签署协议确认页一致，不再按标准费率、非标费率分类。
+- 仅展示本次发生变更的产品类型及费率项，无变更的分组不展示。
+- 所有可见分组全部默认展开，可手动收起或重新展开。
+- 费率对照仅展示产品类型、费率项、变更前、变更后，不展示费率模式；表头及所有单元格内容居中展示。
+- 用户确认费率后，可继续完成补充协议签署。
+
 ---
 
 ## 四、需要业务确认的事项
@@ -92,7 +101,7 @@ flowchart TD
 
 3. 费率表数据来源
    - [ ] 产品类型与签约成本的数据接口及维护方待确认
-   - 分组显隐和默认展开规则已明确，不再按固定分组全量展示
+   - 签署协议确认页与费率变更页的分组及展开规则已明确，分别按页面对应规则展示
 
 4. 电子签约跳转
    - [ ] 跳转地址确认
@@ -120,3 +129,4 @@ flowchart TD
 | 签约主体选择页 | `/Users/hailingdediannao/CodeBuddy/20261112063520/sign-entity-v2.html` |
 | CSP 签署协议确认（双主体） | `/Users/hailingdediannao/CodeBuddy/20261112063520/csp-sign-confirm.html` |
 | CSP 签署协议确认（仅天阙） | `/Users/hailingdediannao/CodeBuddy/20261112063520/csp-sign-confirm-only-tianque.html` |
+| 费率信息变更签约确认 | `/Users/hailingdediannao/CodeBuddy/20261112063520/rate-modification.html` |
