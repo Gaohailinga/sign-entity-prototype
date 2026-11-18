@@ -209,8 +209,14 @@
     });
   }
   function renderFeeGroups() {
-    document.getElementById('feeGroups').innerHTML = feeGroupData.map(function (group, index) {
-      var expanded = index === 0;
+    var visibleFeeGroups = feeGroupData.filter(function (group) {
+      return Array.isArray(group.rows) && group.rows.some(function (row) {
+        var productType = row[0];
+        return productType !== undefined && productType !== null && String(productType).trim() !== '';
+      });
+    });
+    document.getElementById('feeGroups').innerHTML = visibleFeeGroups.map(function (group) {
+      var expanded = group.id === 'scanRates';
       var costWidth = 72 / group.columns.length;
       var colgroup = '<col style="width:28%">' + group.columns.map(function () {
         return '<col style="width:' + costWidth + '%">';
